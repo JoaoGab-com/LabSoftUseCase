@@ -1,38 +1,44 @@
 ﻿@model AppTask.Models.Departamento
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Novo Departamento";
 }
 
-<h1>Create</h1>
+<div class="container mt-4">
+    <h1>Novo Departamento</h1>
+    <hr />
 
-<h4>Departamento</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Ativo" class="control-label"></label>
-                <input asp-for="Ativo" class="form-control" />
-                <span asp-validation-for="Ativo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="/Departamento/Create" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label for="Descricao" class="form-label">
+                        Descrição
+                    </label>
+                    <input type="text" name="Descricao" id="Descricao"
+                           class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Ativo" class="form-label">Ativo</label>
+                    <select name="Ativo" id="Ativo" class="form-select">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Salvar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a href="/Departamento/Index" class="btn btn-secondary">
+            Voltar para a lista
+        </a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
